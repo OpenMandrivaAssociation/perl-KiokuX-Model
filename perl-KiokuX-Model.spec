@@ -1,20 +1,22 @@
 %define upstream_name    KiokuX-Model
 %define upstream_version 0.02
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    A simple application specific wrapper for L<KiokuDB>
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/KiokuX/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	A simple application specific wrapper for L<KiokuDB>
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/KiokuX/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(KiokuDB)
-BuildRequires: perl(MooseX::StrictConstructor)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(KiokuDB)
+BuildRequires:	perl(MooseX::StrictConstructor)
+BuildRequires:	perl(ok)
+BuildRequires:	perl(Throwable)
+BuildArch:	noarch
 
 %description
 This base class makes it easy to create the KiokuDB manpage database
@@ -30,24 +32,26 @@ Catalyst::Model::KiokuDB manpage or whatever you use to glue it in.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
-%{make}
+perl Makefile.PL INSTALLDIRS=vendor
+%make
 
 %check
-%{make} test
+%make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
 
+%changelog
+* Sat Apr 23 2011 Funda Wang <fwang@mandriva.org> 0.20.0-2mdv2011.0
++ Revision: 657784
+- rebuild for updated spec-helper
+
+* Fri Dec 24 2010 Shlomi Fish <shlomif@mandriva.org> 0.20.0-1mdv2011.0
++ Revision: 624678
+- import perl-KiokuX-Model
 
