@@ -1,15 +1,13 @@
 %define upstream_name    KiokuX-Model
-%define upstream_version 0.02
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	6
+Version:	0.02
+Release:	7
 
 Summary:	A simple application specific wrapper for L<KiokuDB>
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/KiokuX-Model
-Source0:	https://cpan.metacpan.org/authors/id/N/NU/NUFFIN/KiokuX-Model-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/N/NU/NUFFIN/KiokuX-Model-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -30,7 +28,7 @@ your subclass for the KiokuX::Model manpage in e.g. the
 Catalyst::Model::KiokuDB manpage or whatever you use to glue it in.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
